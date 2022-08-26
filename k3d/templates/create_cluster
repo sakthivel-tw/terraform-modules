@@ -3,6 +3,10 @@
 function create_k3d_cluster() {
   k3d cluster create --config ${config_path} ${cluster_name}
   k3d kubeconfig write ${cluster_name} --output ${kubeconfig_path}
+  
+    # replace unix with localhost ip
+  echo "Replace unix with localhost IP"
+  sed -i -e 's/unix/127.0.0.1/g' ~/.kube/configs/opa.yml
 }
 
 create_k3d_cluster
